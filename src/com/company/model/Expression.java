@@ -4,8 +4,6 @@ public class Expression {
     private int a;
     private int b;
     private char sign;
-    private double resultInt;
-    private int result;
 
     public int getA() {
         return a;

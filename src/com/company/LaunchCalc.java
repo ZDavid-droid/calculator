@@ -23,28 +23,48 @@ public class LaunchCalc {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String expression = reader.readLine();
             String[] rezParse = parse(expression);
-           expr.setA(Integer.parseInt(rezParse[0]));
-           expr.setB(Integer.parseInt(rezParse[2]));
-           expr.setSign(rezParse[1].charAt(0));
-           if(expr.getSign() != '/'){
-             rez = calculate.calculate(expr);
-             System.out.println(rez);
-           } else{
-               r = calculate.subtraction(expr);
-               System.out.println(r);
-           }
+            //TODO CheckInput Exception
+            //TODO Наследование Полиморфизм
+            if(rezParse[0].charAt(0) == 'I' || rezParse[0].charAt(0) == 'V' || rezParse[0].charAt(0) == 'X'){
+                expr.setA(converter.converterRimToArab(rezParse[0]));
+                expr.setB(converter.converterRimToArab(rezParse[2]));
 
+                expr.setSign(rezParse[1].charAt(0));
+                if(expr.getSign() != '/'){
+                    rez = calculate.calculate(expr);
+                    //System.out.println(rez);
+                    System.out.println(converter.converterArabToRim(rez));
+                } else{
+                    r = calculate.subtraction(expr);
+                    //System.out.println(r);
+                    System.out.println(converter.converterArabToRim((int)r));
+                }
 
+            }else{
+                expr.setA(Integer.parseInt(rezParse[0]));
+                expr.setB(Integer.parseInt(rezParse[2]));
 
-
-
-           /* for(int i = 0; i < rezParse.length; i++){
-                System.out.println(rezParse[i]);
+                expr.setSign(rezParse[1].charAt(0));
+                if(expr.getSign() != '/'){
+                    rez = calculate.calculate(expr);
+                    System.out.println(rez);
+                    //System.out.println(converter.converterArabToRim(rez));
+                } else{
+                    r = calculate.subtraction(expr);
+                    System.out.println(r);
+                    //System.out.println(converter.converterArabToRim((int)r));
+                }
             }
-            a = Integer.parseInt(rezParse[0]);
-            b = Integer.parseInt(rezParse[2]);
-            if(rezParse[1].contentEquals("+")){
-                rez = MathOperation.Sum(a, b);
+
+          /*  expr.setSign(rezParse[1].charAt(0));
+            if(expr.getSign() != '/'){
+                rez = calculate.calculate(expr);
+                System.out.println(rez);
+                System.out.println(converter.converterArabToRim(rez));
+            } else{
+                r = calculate.subtraction(expr);
+                System.out.println(r);
+                System.out.println(converter.converterArabToRim((int)r));
             }*/
 
 
@@ -52,7 +72,7 @@ public class LaunchCalc {
                 break;
             }
 
-            System.out.println("Exception");
+           // System.out.println("Exception");
         }
 
     }
@@ -62,4 +82,5 @@ public class LaunchCalc {
         return input.split(delims);
     }
 
+    //private
 }
