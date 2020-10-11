@@ -4,6 +4,7 @@ import com.company.mathoperation.MathOperation;
 import com.company.model.Expression;
 import com.company.utils.Calculation;
 import com.company.utils.Converter;
+import com.company.utils.ConverterRim;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,6 +15,7 @@ public class LaunchCalc {
     private int b;
     Converter converter = new Converter();
     Expression expr = new Expression();
+    ConverterRim converterRim = new ConverterRim();
     Calculation calculate = new Calculation();
     public void launchCalc() throws IOException {
         int rez = 0;
@@ -23,9 +25,9 @@ public class LaunchCalc {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String expression = reader.readLine();
             String[] rezParse = parse(expression);
-            //TODO CheckInput Exception
-            //TODO Наследование Полиморфизм
-            if(rezParse[0].charAt(0) == 'I' || rezParse[0].charAt(0) == 'V' || rezParse[0].charAt(0) == 'X'){
+            //|| rezParse[0].charAt(0) == 'L' ||
+            //                    rezParse[0].charAt(0) == 'C'
+            if((rezParse[0].charAt(0) == 'I' || rezParse[0].charAt(0) == 'V' || rezParse[0].charAt(0) == 'X')){
                 expr.setA(converter.converterRimToArab(rezParse[0]));
                 expr.setB(converter.converterRimToArab(rezParse[2]));
 
@@ -33,11 +35,14 @@ public class LaunchCalc {
                 if(expr.getSign() != '/'){
                     rez = calculate.calculate(expr);
                     //System.out.println(rez);
-                    System.out.println(converter.converterArabToRim(rez));
+                   // System.out.println(converter.converterArabToRim(rez));
+                    System.out.println(converterRim.converterArabToRim(rez));
                 } else{
                     r = calculate.subtraction(expr);
+                    System.out.println(converterRim.converterArabToRim(rez));
                     //System.out.println(r);
-                    System.out.println(converter.converterArabToRim((int)r));
+                   // System.out.println(converter.converterArabToRim((int)r));
+                   // System.out.println(converter.converterArabToRim((int)r));
                 }
 
             }else{
